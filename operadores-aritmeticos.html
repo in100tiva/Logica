@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operadores Aritméticos</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.1.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        pre[class*="language-"] {
+            margin: 0;
+            border-radius: 0.5rem;
+        }
+        body {
+            background-color: #1f2937;
+            color: #e5e7eb;
+        }
+        .card {
+            background-color: #374151;
+            height: 100%;
+        }
+        .tabs-container {
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar bg-base-100">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                    </svg>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="algoritmo.html">Algoritmo</a></li>
+                    <li><a href="variaveis.html">Variáveis</a></li>
+                    <li><a href="funcoes-internas.html">Funções Internas</a></li>
+                    <li><a href="f-strings.html">F-strings e Interpolação</a></li>
+                    <li><a href="operadores-aritmeticos.html">Operadores Aritméticos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="navbar-center">
+            <a href="index.html" class="btn btn-ghost text-xl">Aprenda Lógica</a>
+        </div>
+        <div class="navbar-end">
+            <button class="btn btn-ghost btn-circle" onclick="openSearchModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </button>
+            <button class="btn btn-ghost btn-circle">
+                <div class="indicator">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                    <span class="badge badge-xs badge-primary indicator-item"></span>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Pesquisa -->
+    <dialog id="search_modal" class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg mb-4">Pesquisar</h3>
+            <input type="text" id="search_input" placeholder="Digite sua pesquisa" class="input input-bordered w-full mb-4" />
+            <div id="search_results" class="mb-4"></div>
+            <div class="modal-action">
+                <button class="btn" onclick="closeSearchModal()">Fechar</button>
+            </div>
+        </div>
+    </dialog>
+
+    <div class="container mx-auto p-4">
+        <h1 id="operadores-aritmeticos" class="text-4xl font-bold mb-8 text-center text-white">Operadores Aritméticos</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="o-que-sao-operadores-aritmeticos" class="card-title mb-4 text-white">O que são Operadores Aritméticos?</h2>
+                    <p>Operadores aritméticos são símbolos usados para realizar operações matemáticas básicas em programação. Eles permitem que você execute cálculos com números e variáveis numéricas em seu código.</p>
+                </div>
+            </div>
+
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="principais-operadores-aritmeticos" class="card-title mb-4 text-white">Principais Operadores Aritméticos</h2>
+                    <ul class="list-disc pl-5">
+                        <li>Adição (+): soma dois valores</li>
+                        <li>Subtração (-): subtrai o segundo valor do primeiro</li>
+                        <li>Multiplicação (*): multiplica dois valores</li>
+                        <li>Divisão (/): divide o primeiro valor pelo segundo</li>
+                        <li>Módulo (%): retorna o resto da divisão</li>
+                        <li>Exponenciação (** ou ^): eleva um número a uma potência</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="ordem-de-precedencia" class="card-title mb-4 text-white">Ordem de Precedência</h2>
+                    <p>A ordem de precedência dos operadores aritméticos é:</p>
+                    <ol class="list-decimal pl-5">
+                        <li>Parênteses ()</li>
+                        <li>Exponenciação</li>
+                        <li>Multiplicação e Divisão (da esquerda para a direita)</li>
+                        <li>Adição e Subtração (da esquerda para a direita)</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="importancia-dos-operadores-aritmeticos" class="card-title mb-4 text-white">Importância dos Operadores Aritméticos</h2>
+                    <ul class="list-disc pl-5">
+                        <li>Permitem realizar cálculos matemáticos no código</li>
+                        <li>São essenciais para processamento de dados numéricos</li>
+                        <li>Facilitam a implementação de fórmulas e algoritmos</li>
+                        <li>São utilizados em praticamente todos os tipos de programas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-xl mb-8">
+            <div class="card-body">
+                <h2 id="exemplo-de-operadores-aritmeticos-em-programacao" class="card-title mb-4 text-white">Exemplo de Operadores Aritméticos em Programação</h2>
+                <p class="mb-4">Vamos criar um exemplo simples usando operadores aritméticos para calcular a média de três números em diferentes linguagens de programação:</p>
+                
+                <div class="tabs-container mb-4">
+                    <div class="tabs">
+                        <a class="tab tab-lifted tab-active" data-lang="python">Python</a>
+                        <a class="tab tab-lifted" data-lang="ruby">Ruby</a>
+                        <a class="tab tab-lifted" data-lang="javascript">JavaScript</a>
+                        <a class="tab tab-lifted" data-lang="rust">Rust</a>
+                        <a class="tab tab-lifted" data-lang="java">Java</a>
+                        <a class="tab tab-lifted" data-lang="cpp">C++</a>
+                    </div>
+                </div>
+
+                <div id="language-market-info" class="bg-gray-800 text-white p-4 rounded-lg mb-4">
+                    Python é amplamente utilizado em ciência de dados, inteligência artificial, desenvolvimento web e automação. É popular em startups e grandes empresas de tecnologia.
+                </div>
+
+                <div class="mockup-code bg-gray-900 text-gray-100">
+                    <pre><code class="language-python">
+# Usando operadores aritméticos para calcular a média de três números
+num1 = 10
+num2 = 15
+num3 = 20
+
+soma = num1 + num2 + num3
+media = soma / 3
+
+print(f"A média de {num1}, {num2} e {num3} é: {media}")
+
+# Exemplo com outros operadores
+resultado = (num1 * num2) - (num3 ** 2) % 7
+print(f"Resultado da expressão complexa: {resultado}")
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-ruby">
+# Usando operadores aritméticos para calcular a média de três números
+num1 = 10
+num2 = 15
+num3 = 20
+
+soma = num1 + num2 + num3
+media = soma / 3.0
+
+puts "A média de #{num1}, #{num2} e #{num3} é: #{media}"
+
+# Exemplo com outros operadores
+resultado = (num1 * num2) - (num3 ** 2) % 7
+puts "Resultado da expressão complexa: #{resultado}"
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-javascript">
+// Usando operadores aritméticos para calcular a média de três números
+let num1 = 10;
+let num2 = 15;
+let num3 = 20;
+
+let soma = num1 + num2 + num3;
+let media = soma / 3;
+
+console.log(`A média de ${num1}, ${num2} e ${num3} é: ${media}`);
+
+// Exemplo com outros operadores
+let resultado = (num1 * num2) - (num3 ** 2) % 7;
+console.log(`Resultado da expressão complexa: ${resultado}`);
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-rust">
+fn main() {
+    // Usando operadores aritméticos para calcular a média de três números
+    let num1 = 10;
+    let num2 = 15;
+    let num3 = 20;
+
+    let soma = num1 + num2 + num3;
+    let media = soma as f64 / 3.0;
+
+    println!("A média de {}, {} e {} é: {}", num1, num2, num3, media);
+
+    // Exemplo com outros operadores
+    let resultado = (num1 * num2) - (num3.pow(2) % 7);
+    println!("Resultado da expressão complexa: {}", resultado);
+}
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-java">
+public class OperadoresAritmeticos {
+    public static void main(String[] args) {
+        // Usando operadores aritméticos para calcular a média de três números
+        int num1 = 10;
+        int num2 = 15;
+        int num3 = 20;
+
+        int soma = num1 + num2 + num3;
+        double media = (double) soma / 3;
+
+        System.out.printf("A média de %d, %d e %d é: %.2f%n", num1, num2, num3, media);
+
+        // Exemplo com outros operadores
+        int resultado = (num1 * num2) - (int) Math.pow(num3, 2) % 7;
+        System.out.println("Resultado da expressão complexa: " + resultado);
+    }
+}
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+
+int main() {
+    // Usando operadores aritméticos para calcular a média de três números
+    int num1 = 10;
+    int num2 = 15;
+    int num3 = 20;
+
+    int soma = num1 + num2 + num3;
+    double media = static_cast&lt;double&gt;(soma) / 3;
+
+    std::cout &lt;&lt; "A média de " &lt;&lt; num1 &lt;&lt; ", " &lt;&lt; num2 &lt;&lt; " e " &lt;&lt; num3 &lt;&lt; " é: " &lt;&lt; media &lt;&lt; std::endl;
+
+    // Exemplo com outros operadores
+    int resultado = (num1 * num2) - static_cast&lt;int&gt;(std::pow(num3, 2)) % 7;
+    std::cout &lt;&lt; "Resultado da expressão complexa: " &lt;&lt; resultado &lt;&lt; std::endl;
+
+    return 0;
+}
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        const marketInfo = {
+            python: "Python é amplamente utilizado em ciência de dados, inteligência artificial, desenvolvimento web e automação. É popular em startups e grandes empresas de tecnologia.",
+            ruby: "Ruby é frequentemente usado para desenvolvimento web, especialmente com o framework Ruby on Rails. É popular em startups e empresas que valorizam produtividade e legibilidade de código.",
+            javascript: "JavaScript é a linguagem principal para desenvolvimento web front-end, mas também é usada no back-end (Node.js). É essencial para empresas de tecnologia web e aplicativos móveis híbridos.",
+            rust: "Rust é usado principalmente em sistemas de baixo nível, desenvolvimento de sistemas operacionais, navegadores web e em aplicações que requerem alta performance e segurança.",
+            java: "Java é amplamente utilizado em desenvolvimento de aplicativos empresariais, sistemas Android, e em grandes sistemas distribuídos. É popular em grandes corporações e no setor financeiro.",
+            cpp: "C++ é usado em sistemas de baixo nível, desenvolvimento de jogos, sistemas embarcados e aplicações que requerem alto desempenho, como em finanças e engenharia."
+        };
+
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const lang = tab.getAttribute('data-lang');
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('tab-active'));
+                tab.classList.add('tab-active');
+                document.querySelectorAll('.mockup-code pre').forEach(pre => pre.classList.add('hidden'));
+                document.querySelector(`.mockup-code pre code.language-${lang}`).parentNode.classList.remove('hidden');
+                document.getElementById('language-market-info').textContent = marketInfo[lang];
+            });
+        });
+
+        // Funcionalidade de pesquisa
+        const searchModal = document.getElementById('search_modal');
+        const searchInput = document.getElementById('search_input');
+        const searchResults = document.getElementById('search_results');
+
+        // Dados de pesquisa
+        const searchData = [
+            { title: "Página Inicial", url: "index.html" },
+            { title: "Algoritmo", url: "algoritmo.html" },
+            { title: "Variáveis", url: "variaveis.html" },
+            { title: "Funções Internas", url: "funcoes-internas.html" },
+            { title: "F-strings e Interpolação", url: "f-strings.html" },
+            { title: "Operadores Aritméticos", url: "operadores-aritmeticos.html" }
+        ];
+
+        function openSearchModal() {
+            searchModal.showModal();
+            searchInput.focus();
+        }
+
+        function closeSearchModal() {
+            searchModal.close();
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+        }
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const filteredResults = searchData.filter(item => 
+                item.title.toLowerCase().includes(query)
+            );
+
+            searchResults.innerHTML = filteredResults.map(item => 
+                `<a href="${item.url}" class="block p-2 hover:bg-base-200">${item.title}</a>`
+            ).join('');
+        });
+    </script>
+</body>
+</html>

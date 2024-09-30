@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritmo</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.1.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        pre[class*="language-"] {
+            margin: 0;
+            border-radius: 0.5rem;
+        }
+        body {
+            background-color: #1f2937;
+            color: #e5e7eb;
+        }
+        .card {
+            background-color: #374151;
+            height: 100%;
+        }
+        .tabs-container {
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar bg-base-100">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                    </svg>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="algoritmo.html">Algoritmo</a></li>
+                    <li><a href="variaveis.html">Variáveis</a></li>
+                    <li><a href="funcoes-internas.html">Funções Internas</a></li>
+                    <li><a href="f-strings.html">F-strings e Interpolação</a></li>
+                    <li><a href="operadores-aritmeticos.html">Operadores Aritméticos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="navbar-center">
+            <a href="index.html" class="btn btn-ghost text-xl">Aprenda Lógica</a>
+        </div>
+        <div class="navbar-end">
+            <button class="btn btn-ghost btn-circle" onclick="openSearchModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </button>
+            <button class="btn btn-ghost btn-circle">
+                <div class="indicator">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                    <span class="badge badge-xs badge-primary indicator-item"></span>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Pesquisa -->
+    <dialog id="search_modal" class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg mb-4">Pesquisar</h3>
+            <input type="text" id="search_input" placeholder="Digite sua pesquisa" class="input input-bordered w-full mb-4" />
+            <div id="search_results" class="mb-4"></div>
+            <div class="modal-action">
+                <button class="btn" onclick="closeSearchModal()">Fechar</button>
+            </div>
+        </div>
+    </dialog>
+
+    <div class="container mx-auto p-4">
+        <h1 id="algoritmo" class="text-4xl font-bold mb-8 text-center text-white">Algoritmo</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="o-que-é-um-algoritmo" class="card-title mb-4 text-white">O que é um Algoritmo?</h2>
+                    <p>Um algoritmo é uma sequência lógica e finita de instruções bem definidas para resolver um problema ou realizar uma tarefa específica. É como uma receita que lista os passos necessários para completar uma ação.</p>
+                </div>
+            </div>
+
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="características-de-um-algoritmo" class="card-title mb-4 text-white">Características de um Algoritmo</h2>
+                    <ul class="list-disc pl-5">
+                        <li>Sequência finita de passos</li>
+                        <li>Cada passo deve ser bem definido e não ambíguo</li>
+                        <li>Deve ter um início e um fim claros</li>
+                        <li>Deve ser efetivo (resolver o problema proposto)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="exemplo-de-algoritmo-do-dia-a-dia" class="card-title mb-4 text-white">Exemplo de Algoritmo do Dia a Dia</h2>
+                    <p>Algoritmo para escovar os dentes:</p>
+                    <ol class="list-decimal pl-5">
+                        <li>Pegar a escova de dentes</li>
+                        <li>Colocar pasta de dente na escova</li>
+                        <li>Escovar os dentes por 2 minutos</li>
+                        <li>Enxaguar a boca com água</li>
+                        <li>Limpar a escova</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="importância-dos-algoritmos" class="card-title mb-4 text-white">Importância dos Algoritmos</h2>
+                    <ul class="list-disc pl-5">
+                        <li>Fornecem uma abordagem estruturada para resolver problemas</li>
+                        <li>São a base para o desenvolvimento de software</li>
+                        <li>Ajudam a otimizar processos e melhorar a eficiência</li>
+                        <li>Facilitam a comunicação de ideias e soluções</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-xl mb-8">
+            <div class="card-body">
+                <h2 id="exemplo-de-algoritmo-em-programação" class="card-title mb-4 text-white">Exemplo de Algoritmo em Programação</h2>
+                <p class="mb-4">Vamos criar um algoritmo simples para fazer um sanduíche em diferentes linguagens de programação:</p>
+                
+                <div class="tabs-container mb-4">
+                    <div class="tabs">
+                        <a class="tab tab-lifted tab-active" data-lang="python">Python</a>
+                        <a class="tab tab-lifted" data-lang="ruby">Ruby</a>
+                        <a class="tab tab-lifted" data-lang="javascript">JavaScript</a>
+                        <a class="tab tab-lifted" data-lang="rust">Rust</a>
+                        <a class="tab tab-lifted" data-lang="java">Java</a>
+                        <a class="tab tab-lifted" data-lang="cpp">C++</a>
+                    </div>
+                </div>
+
+                <div id="language-market-info" class="bg-gray-800 text-white p-4 rounded-lg mb-4">
+                    Python é amplamente utilizado em ciência de dados, inteligência artificial, desenvolvimento web e automação. É popular em startups e grandes empresas de tecnologia.
+                </div>
+
+                <div class="mockup-code bg-gray-900 text-gray-100">
+                    <pre><code class="language-python">
+def fazer_sanduiche():
+    print("1. Pegar duas fatias de pão")
+    print("2. Colocar queijo em uma fatia")
+    print("3. Colocar presunto sobre o queijo")
+    print("4. Colocar alface sobre o presunto")
+    print("5. Fechar o sanduíche com a outra fatia")
+    print("6. Cortar o sanduíche ao meio")
+    print("Sanduíche pronto!")
+
+fazer_sanduiche()
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-ruby">
+def fazer_sanduiche
+  puts "1. Pegar duas fatias de pão"
+  puts "2. Colocar queijo em uma fatia"
+  puts "3. Colocar presunto sobre o queijo"
+  puts "4. Colocar alface sobre o presunto"
+  puts "5. Fechar o sanduíche com a outra fatia"
+  puts "6. Cortar o sanduíche ao meio"
+  puts "Sanduíche pronto!"
+end
+
+fazer_sanduiche
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-javascript">
+function fazerSanduiche() {
+    console.log("1. Pegar duas fatias de pão");
+    console.log("2. Colocar queijo em uma fatia");
+    console.log("3. Colocar presunto sobre o queijo");
+    console.log("4. Colocar alface sobre o presunto");
+    console.log("5. Fechar o sanduíche com a outra fatia");
+    console.log("6. Cortar o sanduíche ao meio");
+    console.log("Sanduíche pronto!");
+}
+
+fazerSanduiche();
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-rust">
+fn fazer_sanduiche() {
+    println!("1. Pegar duas fatias de pão");
+    println!("2. Colocar queijo em uma fatia");
+    println!("3. Colocar presunto sobre o queijo");
+    println!("4. Colocar alface sobre o presunto");
+    println!("5. Fechar o sanduíche com a outra fatia");
+    println!("6. Cortar o sanduíche ao meio");
+    println!("Sanduíche pronto!");
+}
+
+fn main() {
+    fazer_sanduiche();
+}
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-java">
+public class FazerSanduiche {
+    public static void fazerSanduiche() {
+        System.out.println("1. Pegar duas fatias de pão");
+        System.out.println("2. Colocar queijo em uma fatia");
+        System.out.println("3. Colocar presunto sobre o queijo");
+        System.out.println("4. Colocar alface sobre o presunto");
+        System.out.println("5. Fechar o sanduíche com a outra fatia");
+        System.out.println("6. Cortar o sanduíche ao meio");
+        System.out.println("Sanduíche pronto!");
+    }
+
+    public static void main(String[] args) {
+        fazerSanduiche();
+    }
+}
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-cpp">
+#include &lt;iostream&gt;
+
+void fazerSanduiche() {
+    std::cout << "1. Pegar duas fatias de pão" << std::endl;
+    std::cout << "2. Colocar queijo em uma fatia" << std::endl;
+    std::cout << "3. Colocar presunto sobre o queijo" << std::endl;
+    std::cout << "4. Colocar alface sobre o presunto" << std::endl;
+    std::cout << "5. Fechar o sanduíche com a outra fatia" << std::endl;
+    std::cout << "6. Cortar o sanduíche ao meio" << std::endl;
+    std::cout << "Sanduíche pronto!" << std::endl;
+}
+
+int main() {
+    fazerSanduiche();
+    return 0;
+}
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        const marketInfo = {
+            python: "Python é amplamente utilizado em ciência de dados, inteligência artificial, desenvolvimento web e automação. É popular em startups e grandes empresas de tecnologia.",
+            ruby: "Ruby é frequentemente usado para desenvolvimento web, especialmente com o framework Ruby on Rails. É popular em startups e empresas que valorizam produtividade e legibilidade de código.",
+            javascript: "JavaScript é a linguagem principal para desenvolvimento web front-end, mas também é usada no back-end (Node.js). É essencial para empresas de tecnologia web e aplicativos móveis híbridos.",
+            rust: "Rust é usado principalmente em sistemas de baixo nível, desenvolvimento de sistemas operacionais, navegadores web e em aplicações que requerem alta performance e segurança.",
+            java: "Java é amplamente utilizado em desenvolvimento de aplicativos empresariais, sistemas Android, e em grandes sistemas distribuídos. É popular em grandes corporações e no setor financeiro.",
+            cpp: "C++ é usado em sistemas de baixo nível, desenvolvimento de jogos, sistemas embarcados e aplicações que requerem alto desempenho, como em finanças e engenharia."
+        };
+
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const lang = tab.getAttribute('data-lang');
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('tab-active'));
+                tab.classList.add('tab-active');
+                document.querySelectorAll('.mockup-code pre').forEach(pre => pre.classList.add('hidden'));
+                document.querySelector(`.mockup-code pre code.language-${lang}`).parentNode.classList.remove('hidden');
+                document.getElementById('language-market-info').textContent = marketInfo[lang];
+            });
+        });
+
+        // Funcionalidade de pesquisa
+        const searchModal = document.getElementById('search_modal');
+        const searchInput = document.getElementById('search_input');
+        const searchResults = document.getElementById('search_results');
+
+        // Dados de pesquisa
+        const searchData = [
+            { title: "Página Inicial", url: "index.html" },
+            { title: "Algoritmo", url: "algoritmo.html" },
+            { title: "Variáveis", url: "variaveis.html" },
+            { title: "Funções Internas", url: "funcoes-internas.html" },
+            { title: "F-strings e Interpolação", url: "f-strings.html" },
+            { title: "Operadores Aritméticos", url: "operadores-aritmeticos.html" }
+        ];
+
+        function openSearchModal() {
+            searchModal.showModal();
+            searchInput.focus();
+        }
+
+        function closeSearchModal() {
+            searchModal.close();
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+        }
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const filteredResults = searchData.filter(item => 
+                item.title.toLowerCase().includes(query)
+            );
+
+            searchResults.innerHTML = filteredResults.map(item => 
+                `<a href="${item.url}" class="block p-2 hover:bg-base-200">${item.title}</a>`
+            ).join('');
+        });
+    </script>
+</body>
+</html>

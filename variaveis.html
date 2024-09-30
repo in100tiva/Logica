@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variáveis</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.1.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        pre[class*="language-"] {
+            margin: 0;
+            border-radius: 0.5rem;
+        }
+        body {
+            background-color: #1f2937;
+            color: #e5e7eb;
+        }
+        .card {
+            background-color: #374151;
+            height: 100%;
+        }
+        .tabs-container {
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar bg-base-100">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                    </svg>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="algoritmo.html">Algoritmo</a></li>
+                    <li><a href="variaveis.html">Variáveis</a></li>
+                    <li><a href="funcoes-internas.html">Funções Internas</a></li>
+                    <li><a href="f-strings.html">F-strings e Interpolação</a></li>
+                    <li><a href="operadores-aritmeticos.html">Operadores Aritméticos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="navbar-center">
+            <a href="index.html" class="btn btn-ghost text-xl">Aprenda Lógica</a>
+        </div>
+        <div class="navbar-end">
+            <button class="btn btn-ghost btn-circle" onclick="openSearchModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </button>
+            <button class="btn btn-ghost btn-circle">
+                <div class="indicator">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                    <span class="badge badge-xs badge-primary indicator-item"></span>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Pesquisa -->
+    <dialog id="search_modal" class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg mb-4">Pesquisar</h3>
+            <input type="text" id="search_input" placeholder="Digite sua pesquisa" class="input input-bordered w-full mb-4" />
+            <div id="search_results" class="mb-4"></div>
+            <div class="modal-action">
+                <button class="btn" onclick="closeSearchModal()">Fechar</button>
+            </div>
+        </div>
+    </dialog>
+
+    <div class="container mx-auto p-4">
+        <h1 id="variaveis" class="text-4xl font-bold mb-8 text-center text-white">Variáveis</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="o-que-sao-variaveis" class="card-title mb-4 text-white">O que são Variáveis?</h2>
+                    <p>Variáveis são espaços na memória do computador usados para armazenar dados temporariamente durante a execução de um programa. Elas são como "caixas" que guardam informações que podem ser usadas e modificadas ao longo do código.</p>
+                </div>
+            </div>
+
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="caracteristicas-das-variaveis" class="card-title mb-4 text-white">Características das Variáveis</h2>
+                    <ul class="list-disc pl-5">
+                        <li>Possuem um nome único (identificador)</li>
+                        <li>Têm um tipo de dado associado (em linguagens tipadas)</li>
+                        <li>Podem ter seu valor alterado durante a execução</li>
+                        <li>Ocupam espaço na memória</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="exemplo-de-uso-de-variaveis" class="card-title mb-4 text-white">Exemplo de Uso de Variáveis</h2>
+                    <p>Calculando a área de um retângulo:</p>
+                    <ol class="list-decimal pl-5">
+                        <li>Declarar variável para largura</li>
+                        <li>Declarar variável para altura</li>
+                        <li>Multiplicar largura por altura</li>
+                        <li>Armazenar o resultado em uma variável de área</li>
+                        <li>Exibir o valor da área</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="importancia-das-variaveis" class="card-title mb-4 text-white">Importância das Variáveis</h2>
+                    <ul class="list-disc pl-5">
+                        <li>Permitem armazenar e manipular dados</li>
+                        <li>Tornam o código mais flexível e reutilizável</li>
+                        <li>Facilitam a organização e leitura do código</li>
+                        <li>São essenciais para realizar cálculos e operações</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-xl mb-8">
+            <div class="card-body">
+                <h2 id="exemplo-de-variaveis-em-programacao" class="card-title mb-4 text-white">Exemplo de Variáveis em Programação</h2>
+                <p class="mb-4">Vamos criar um exemplo simples de uso de variáveis para calcular a área de um retângulo em diferentes linguagens de programação:</p>
+                
+                <div class="tabs-container mb-4">
+                    <div class="tabs">
+                        <a class="tab tab-lifted tab-active" data-lang="python">Python</a>
+                        <a class="tab tab-lifted" data-lang="ruby">Ruby</a>
+                        <a class="tab tab-lifted" data-lang="javascript">JavaScript</a>
+                        <a class="tab tab-lifted" data-lang="rust">Rust</a>
+                        <a class="tab tab-lifted" data-lang="java">Java</a>
+                        <a class="tab tab-lifted" data-lang="cpp">C++</a>
+                    </div>
+                </div>
+
+                <div id="language-market-info" class="bg-gray-800 text-white p-4 rounded-lg mb-4">
+                    Python é amplamente utilizado em ciência de dados, inteligência artificial, desenvolvimento web e automação. É popular em startups e grandes empresas de tecnologia.
+                </div>
+
+                <div class="mockup-code bg-gray-900 text-gray-100">
+                    <pre><code class="language-python">
+# Calculando a área de um retângulo
+largura = 5
+altura = 3
+
+area = largura * altura
+
+print(f"A área do retângulo é: {area}")
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-ruby">
+# Calculando a área de um retângulo
+largura = 5
+altura = 3
+
+area = largura * altura
+
+puts "A área do retângulo é: #{area}"
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-javascript">
+// Calculando a área de um retângulo
+let largura = 5;
+let altura = 3;
+
+let area = largura * altura;
+
+console.log(`A área do retângulo é: ${area}`);
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-rust">
+fn main() {
+    // Calculando a área de um retângulo
+    let largura: i32 = 5;
+    let altura: i32 = 3;
+
+    let area = largura * altura;
+
+    println!("A área do retângulo é: {}", area);
+}
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-java">
+public class CalculaArea {
+    public static void main(String[] args) {
+        // Calculando a área de um retângulo
+        int largura = 5;
+        int altura = 3;
+
+        int area = largura * altura;
+
+        System.out.println("A área do retângulo é: " + area);
+    }
+}
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-cpp">
+#include &lt;iostream&gt;
+
+int main() {
+    // Calculando a área de um retângulo
+    int largura = 5;
+    int altura = 3;
+
+    int area = largura * altura;
+
+    std::cout << "A área do retângulo é: " << area << std::endl;
+
+    return 0;
+}
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        const marketInfo = {
+            python: "Python é amplamente utilizado em ciência de dados, inteligência artificial, desenvolvimento web e automação. É popular em startups e grandes empresas de tecnologia.",
+            ruby: "Ruby é frequentemente usado para desenvolvimento web, especialmente com o framework Ruby on Rails. É popular em startups e empresas que valorizam produtividade e legibilidade de código.",
+            javascript: "JavaScript é a linguagem principal para desenvolvimento web front-end, mas também é usada no back-end (Node.js). É essencial para empresas de tecnologia web e aplicativos móveis híbridos.",
+            rust: "Rust é usado principalmente em sistemas de baixo nível, desenvolvimento de sistemas operacionais, navegadores web e em aplicações que requerem alta performance e segurança.",
+            java: "Java é amplamente utilizado em desenvolvimento de aplicativos empresariais, sistemas Android, e em grandes sistemas distribuídos. É popular em grandes corporações e no setor financeiro.",
+            cpp: "C++ é usado em sistemas de baixo nível, desenvolvimento de jogos, sistemas embarcados e aplicações que requerem alto desempenho, como em finanças e engenharia."
+        };
+
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const lang = tab.getAttribute('data-lang');
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('tab-active'));
+                tab.classList.add('tab-active');
+                document.querySelectorAll('.mockup-code pre').forEach(pre => pre.classList.add('hidden'));
+                document.querySelector(`.mockup-code pre code.language-${lang}`).parentNode.classList.remove('hidden');
+                document.getElementById('language-market-info').textContent = marketInfo[lang];
+            });
+        });
+
+        // Funcionalidade de pesquisa
+        const searchModal = document.getElementById('search_modal');
+        const searchInput = document.getElementById('search_input');
+        const searchResults = document.getElementById('search_results');
+
+        // Dados de pesquisa
+        const searchData = [
+            { title: "Página Inicial", url: "index.html" },
+            { title: "Algoritmo", url: "algoritmo.html" },
+            { title: "Variáveis", url: "variaveis.html" },
+            { title: "Funções Internas", url: "funcoes-internas.html" },
+            { title: "F-strings e Interpolação", url: "f-strings.html" },
+            { title: "Operadores Aritméticos", url: "operadores-aritmeticos.html" }
+        ];
+
+        function openSearchModal() {
+            searchModal.showModal();
+            searchInput.focus();
+        }
+
+        function closeSearchModal() {
+            searchModal.close();
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+        }
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const filteredResults = searchData.filter(item => 
+                item.title.toLowerCase().includes(query)
+            );
+
+            searchResults.innerHTML = filteredResults.map(item => 
+                `<a href="${item.url}" class="block p-2 hover:bg-base-200">${item.title}</a>`
+            ).join('');
+        });
+    </script>
+</body>
+</html>

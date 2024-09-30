@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprenda Lógica de Programação</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.1.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'custom-black': '#1a1a1a',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 min-h-screen flex flex-col">
+    <div class="navbar bg-base-100">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                    </svg>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="algoritmo.html">Algoritmo</a></li>
+                    <li><a href="variaveis.html">Variáveis</a></li>
+                    <li><a href="funcoes-internas.html">Funções Internas</a></li>
+                    <li><a href="f-strings.html">F-strings e Interpolação</a></li>
+                    <li><a href="operadores-aritmeticos.html">Operadores Aritméticos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="navbar-center">
+            <a href="index.html" class="btn btn-ghost text-xl">Aprenda Lógica</a>
+        </div>
+        <div class="navbar-end">
+            <button class="btn btn-ghost btn-circle" onclick="openSearchModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </button>
+            <button class="btn btn-ghost btn-circle">
+                <div class="indicator">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                    <span class="badge badge-xs badge-primary indicator-item"></span>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Pesquisa -->
+    <dialog id="search_modal" class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg mb-4">Pesquisar</h3>
+            <input type="text" id="search_input" placeholder="Digite sua pesquisa" class="input input-bordered w-full mb-4" />
+            <div id="search_results" class="mb-4"></div>
+            <div class="modal-action">
+                <button class="btn" onclick="closeSearchModal()">Fechar</button>
+            </div>
+        </div>
+    </dialog>
+
+    <main class="container mx-auto p-4 flex-grow">
+        <h2 class="text-2xl font-semibold mb-6 text-white">Escolha um tópico para começar:</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <a href="algoritmo.html" class="card bg-gray-800 shadow-xl hover:shadow-2xl transition-shadow">
+                <div class="card-body">
+                    <h3 class="card-title text-white">Algoritmo</h3>
+                    <p class="text-gray-300">Aprenda o que é um algoritmo e como criar sequências lógicas de instruções.</p>
+                </div>
+            </a>
+            
+            <a href="variaveis.html" class="card bg-gray-800 shadow-xl hover:shadow-2xl transition-shadow">
+                <div class="card-body">
+                    <h3 class="card-title text-white">Variáveis</h3>
+                    <p class="text-gray-300">Entenda como armazenar e manipular dados em seu programa.</p>
+                </div>
+            </a>
+            
+            <a href="funcoes-internas.html" class="card bg-gray-800 shadow-xl hover:shadow-2xl transition-shadow">
+                <div class="card-body">
+                    <h3 class="card-title text-white">Funções Internas</h3>
+                    <p class="text-gray-300">Descubra as ferramentas pré-definidas disponíveis para uso imediato.</p>
+                </div>
+            </a>
+            
+            <a href="f-strings.html" class="card bg-gray-800 shadow-xl hover:shadow-2xl transition-shadow">
+                <div class="card-body">
+                    <h3 class="card-title text-white">F-strings e Interpolação</h3>
+                    <p class="text-gray-300">Aprenda a incorporar expressões dentro de strings de forma eficiente.</p>
+                </div>
+            </a>
+            
+            <a href="operadores-aritmeticos.html" class="card bg-gray-800 shadow-xl hover:shadow-2xl transition-shadow">
+                <div class="card-body">
+                    <h3 class="card-title text-white">Operadores Aritméticos</h3>
+                    <p class="text-gray-300">Conheça os símbolos usados para realizar operações matemáticas básicas.</p>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-custom-black text-white p-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Aprenda Lógica de Programação. Todos os direitos reservados.</p>
+            <p>Criado e desenvolvido por Luan Oliveira dos Santos</p>
+        </div>
+    </footer>
+
+    <script>
+        const searchModal = document.getElementById('search_modal');
+        const searchInput = document.getElementById('search_input');
+        const searchResults = document.getElementById('search_results');
+
+        // Dados de pesquisa
+        const searchData = [
+            { title: "Página Inicial", url: "index.html" },
+            { title: "Algoritmo", url: "algoritmo.html" },
+            { title: "Variáveis", url: "variaveis.html" },
+            { title: "Funções Internas", url: "funcoes-internas.html" },
+            { title: "F-strings e Interpolação", url: "f-strings.html" },
+            { title: "Operadores Aritméticos", url: "operadores-aritmeticos.html" }
+        ];
+
+        function openSearchModal() {
+            searchModal.showModal();
+            searchInput.focus();
+        }
+
+        function closeSearchModal() {
+            searchModal.close();
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+        }
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const filteredResults = searchData.filter(item => 
+                item.title.toLowerCase().includes(query)
+            );
+
+            searchResults.innerHTML = filteredResults.map(item => 
+                `<a href="${item.url}" class="block p-2 hover:bg-base-200">${item.title}</a>`
+            ).join('');
+        });
+    </script>
+</body>
+</html>

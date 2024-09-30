@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funções Internas</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.1.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        pre[class*="language-"] {
+            margin: 0;
+            border-radius: 0.5rem;
+        }
+        body {
+            background-color: #1f2937;
+            color: #e5e7eb;
+        }
+        .card {
+            background-color: #374151;
+            height: 100%;
+        }
+        .tabs-container {
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar bg-base-100">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                    </svg>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="algoritmo.html">Algoritmo</a></li>
+                    <li><a href="variaveis.html">Variáveis</a></li>
+                    <li><a href="funcoes-internas.html">Funções Internas</a></li>
+                    <li><a href="f-strings.html">F-strings e Interpolação</a></li>
+                    <li><a href="operadores-aritmeticos.html">Operadores Aritméticos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="navbar-center">
+            <a href="index.html" class="btn btn-ghost text-xl">Aprenda Lógica</a>
+        </div>
+        <div class="navbar-end">
+            <button class="btn btn-ghost btn-circle" onclick="openSearchModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </button>
+            <button class="btn btn-ghost btn-circle">
+                <div class="indicator">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                    <span class="badge badge-xs badge-primary indicator-item"></span>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Pesquisa -->
+    <dialog id="search_modal" class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg mb-4">Pesquisar</h3>
+            <input type="text" id="search_input" placeholder="Digite sua pesquisa" class="input input-bordered w-full mb-4" />
+            <div id="search_results" class="mb-4"></div>
+            <div class="modal-action">
+                <button class="btn" onclick="closeSearchModal()">Fechar</button>
+            </div>
+        </div>
+    </dialog>
+
+    <div class="container mx-auto p-4">
+        <h1 id="funcoes-internas" class="text-4xl font-bold mb-8 text-center text-white">Funções Internas</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="o-que-sao-funcoes-internas" class="card-title mb-4 text-white">O que são Funções Internas?</h2>
+                    <p>Funções internas, também conhecidas como funções embutidas ou built-in functions, são funções pré-definidas na linguagem de programação que estão sempre disponíveis para uso, sem a necessidade de importar módulos adicionais.</p>
+                </div>
+            </div>
+
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="caracteristicas-das-funcoes-internas" class="card-title mb-4 text-white">Características das Funções Internas</h2>
+                    <ul class="list-disc pl-5">
+                        <li>Estão sempre disponíveis para uso</li>
+                        <li>Realizam tarefas comuns e frequentes</li>
+                        <li>Geralmente são otimizadas para melhor desempenho</li>
+                        <li>Facilitam a escrita de código, evitando reinventar a roda</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="exemplos-de-funcoes-internas" class="card-title mb-4 text-white">Exemplos de Funções Internas</h2>
+                    <ul class="list-disc pl-5">
+                        <li>print(): exibe informações na tela</li>
+                        <li>len(): retorna o tamanho de uma sequência</li>
+                        <li>type(): retorna o tipo de um objeto</li>
+                        <li>input(): recebe entrada do usuário</li>
+                        <li>int(), float(), str(): convertem tipos de dados</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="importancia-das-funcoes-internas" class="card-title mb-4 text-white">Importância das Funções Internas</h2>
+                    <ul class="list-disc pl-5">
+                        <li>Aumentam a produtividade do programador</li>
+                        <li>Garantem consistência e confiabilidade no código</li>
+                        <li>Facilitam o aprendizado da linguagem para iniciantes</li>
+                        <li>Permitem realizar operações complexas com comandos simples</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-xl mb-8">
+            <div class="card-body">
+                <h2 id="exemplo-de-funcoes-internas-em-programacao" class="card-title mb-4 text-white">Exemplo de Funções Internas em Programação</h2>
+                <p class="mb-4">Vamos criar um exemplo simples de uso de funções internas para calcular a área de um círculo em diferentes linguagens de programação:</p>
+                
+                <div class="tabs-container mb-4">
+                    <div class="tabs">
+                        <a class="tab tab-lifted tab-active" data-lang="python">Python</a>
+                        <a class="tab tab-lifted" data-lang="ruby">Ruby</a>
+                        <a class="tab tab-lifted" data-lang="javascript">JavaScript</a>
+                        <a class="tab tab-lifted" data-lang="rust">Rust</a>
+                        <a class="tab tab-lifted" data-lang="java">Java</a>
+                        <a class="tab tab-lifted" data-lang="cpp">C++</a>
+                    </div>
+                </div>
+
+                <div id="language-market-info" class="bg-gray-800 text-white p-4 rounded-lg mb-4">
+                    Python é amplamente utilizado em ciência de dados, inteligência artificial, desenvolvimento web e automação. É popular em startups e grandes empresas de tecnologia.
+                </div>
+
+                <div class="mockup-code bg-gray-900 text-gray-100">
+                    <pre><code class="language-python">
+import math
+
+# Usando funções internas para calcular a área de um círculo
+raio = 5
+area = math.pi * math.pow(raio, 2)
+
+print(f"A área do círculo com raio {raio} é: {area:.2f}")
+print(f"O tipo da variável area é: {type(area)}")
+print(f"O valor de pi é: {math.pi:.5f}")
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-ruby">
+# Usando funções internas para calcular a área de um círculo
+raio = 5
+area = Math::PI * raio ** 2
+
+puts "A área do círculo com raio #{raio} é: #{area.round(2)}"
+puts "O tipo da variável area é: #{area.class}"
+puts "O valor de pi é: #{Math::PI.round(5)}"
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-javascript">
+// Usando funções internas para calcular a área de um círculo
+const raio = 5;
+const area = Math.PI * Math.pow(raio, 2);
+
+console.log(`A área do círculo com raio ${raio} é: ${area.toFixed(2)}`);
+console.log(`O tipo da variável area é: ${typeof area}`);
+console.log(`O valor de pi é: ${Math.PI.toFixed(5)}`);
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-rust">
+use std::f64::consts::PI;
+
+fn main() {
+    // Usando funções internas para calcular a área de um círculo
+    let raio: f64 = 5.0;
+    let area = PI * raio.powi(2);
+
+    println!("A área do círculo com raio {} é: {:.2}", raio, area);
+    println!("O tipo da variável area é: f64");
+    println!("O valor de pi é: {:.5}", PI);
+}
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-java">
+public class CalculaAreaCirculo {
+    public static void main(String[] args) {
+        // Usando funções internas para calcular a área de um círculo
+        double raio = 5;
+        double area = Math.PI * Math.pow(raio, 2);
+
+        System.out.printf("A área do círculo com raio %.0f é: %.2f%n", raio, area);
+        System.out.println("O tipo da variável area é: " + ((Object)area).getClass().getSimpleName());
+        System.out.printf("O valor de pi é: %.5f%n", Math.PI);
+    }
+}
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+#include &lt;iomanip&gt;
+
+int main() {
+    // Usando funções internas para calcular a área de um círculo
+    double raio = 5;
+    double area = M_PI * std::pow(raio, 2);
+
+    std::cout &lt;&lt; "A área do círculo com raio " &lt;&lt; raio &lt;&lt; " é: " &lt;&lt; std::fixed &lt;&lt; std::setprecision(2) &lt;&lt; area &lt;&lt; std::endl;
+    std::cout &lt;&lt; "O tipo da variável area é: double" &lt;&lt; std::endl;
+    std::cout &lt;&lt; "O valor de pi é: " &lt;&lt; std::setprecision(5) &lt;&lt; M_PI &lt;&lt; std::endl;
+
+    return 0;
+}
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        const marketInfo = {
+            python: "Python é amplamente utilizado em ciência de dados, inteligência artificial, desenvolvimento web e automação. É popular em startups e grandes empresas de tecnologia.",
+            ruby: "Ruby é frequentemente usado para desenvolvimento web, especialmente com o framework Ruby on Rails. É popular em startups e empresas que valorizam produtividade e legibilidade de código.",
+            javascript: "JavaScript é a linguagem principal para desenvolvimento web front-end, mas também é usada no back-end (Node.js). É essencial para empresas de tecnologia web e aplicativos móveis híbridos.",
+            rust: "Rust é usado principalmente em sistemas de baixo nível, desenvolvimento de sistemas operacionais, navegadores web e em aplicações que requerem alta performance e segurança.",
+            java: "Java é amplamente utilizado em desenvolvimento de aplicativos empresariais, sistemas Android, e em grandes sistemas distribuídos. É popular em grandes corporações e no setor financeiro.",
+            cpp: "C++ é usado em sistemas de baixo nível, desenvolvimento de jogos, sistemas embarcados e aplicações que requerem alto desempenho, como em finanças e engenharia."
+        };
+
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const lang = tab.getAttribute('data-lang');
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('tab-active'));
+                tab.classList.add('tab-active');
+                document.querySelectorAll('.mockup-code pre').forEach(pre => pre.classList.add('hidden'));
+                document.querySelector(`.mockup-code pre code.language-${lang}`).parentNode.classList.remove('hidden');
+                document.getElementById('language-market-info').textContent = marketInfo[lang];
+            });
+        });
+
+        // Funcionalidade de pesquisa
+        const searchModal = document.getElementById('search_modal');
+        const searchInput = document.getElementById('search_input');
+        const searchResults = document.getElementById('search_results');
+
+        // Dados de pesquisa
+        const searchData = [
+            { title: "Página Inicial", url: "index.html" },
+            { title: "Algoritmo", url: "algoritmo.html" },
+            { title: "Variáveis", url: "variaveis.html" },
+            { title: "Funções Internas", url: "funcoes-internas.html" },
+            { title: "F-strings e Interpolação", url: "f-strings.html" },
+            { title: "Operadores Aritméticos", url: "operadores-aritmeticos.html" }
+        ];
+
+        function openSearchModal() {
+            searchModal.showModal();
+            searchInput.focus();
+        }
+
+        function closeSearchModal() {
+            searchModal.close();
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+        }
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const filteredResults = searchData.filter(item => 
+                item.title.toLowerCase().includes(query)
+            );
+
+            searchResults.innerHTML = filteredResults.map(item => 
+                `<a href="${item.url}" class="block p-2 hover:bg-base-200">${item.title}</a>`
+            ).join('');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F-strings e Interpolação de Strings</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.1.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        pre[class*="language-"] {
+            margin: 0;
+            border-radius: 0.5rem;
+        }
+        body {
+            background-color: #1f2937;
+            color: #e5e7eb;
+        }
+        .card {
+            background-color: #374151;
+            height: 100%;
+        }
+        .tabs-container {
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar bg-base-100">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                    </svg>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="algoritmo.html">Algoritmo</a></li>
+                    <li><a href="variaveis.html">Variáveis</a></li>
+                    <li><a href="funcoes-internas.html">Funções Internas</a></li>
+                    <li><a href="f-strings.html">F-strings e Interpolação</a></li>
+                    <li><a href="operadores-aritmeticos.html">Operadores Aritméticos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="navbar-center">
+            <a href="index.html" class="btn btn-ghost text-xl">Aprenda Lógica</a>
+        </div>
+        <div class="navbar-end">
+            <button class="btn btn-ghost btn-circle" onclick="openSearchModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </button>
+            <button class="btn btn-ghost btn-circle">
+                <div class="indicator">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                    <span class="badge badge-xs badge-primary indicator-item"></span>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Pesquisa -->
+    <dialog id="search_modal" class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg mb-4">Pesquisar</h3>
+            <input type="text" id="search_input" placeholder="Digite sua pesquisa" class="input input-bordered w-full mb-4" />
+            <div id="search_results" class="mb-4"></div>
+            <div class="modal-action">
+                <button class="btn" onclick="closeSearchModal()">Fechar</button>
+            </div>
+        </div>
+    </dialog>
+
+    <div class="container mx-auto p-4">
+        <h1 id="f-strings" class="text-4xl font-bold mb-8 text-center text-white">F-strings e Interpolação de Strings</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="o-que-sao-f-strings" class="card-title mb-4 text-white">O que são F-strings e Interpolação de Strings?</h2>
+                    <p>F-strings (em Python) e interpolação de strings são técnicas para incorporar expressões dentro de strings. Elas oferecem uma maneira concisa e conveniente de formatar strings com valores dinâmicos.</p>
+                </div>
+            </div>
+
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="caracteristicas" class="card-title mb-4 text-white">Características</h2>
+                    <ul class="list-disc pl-5">
+                        <li>Permitem inserir variáveis e expressões diretamente nas strings</li>
+                        <li>Melhoram a legibilidade do código</li>
+                        <li>Avaliam as expressões em tempo de execução</li>
+                        <li>Geralmente oferecem melhor performance que concatenação de strings</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="vantagens" class="card-title mb-4 text-white">Vantagens</h2>
+                    <ul class="list-disc pl-5">
+                        <li>Sintaxe mais clara e concisa</li>
+                        <li>Reduz erros de formatação</li>
+                        <li>Facilita a manutenção e atualização do código</li>
+                        <li>Permite operações e chamadas de funções diretamente</li>
+                        <li>Melhora a performance em muitos casos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card shadow-xl">
+                <div class="card-body">
+                    <h2 id="comparacao" class="card-title mb-4 text-white">Comparação entre Linguagens</h2>
+                    <ul class="list-disc pl-5">
+                        <li>Python: F-strings (desde a versão 3.6)</li>
+                        <li>Ruby: Interpolação com #{}</li>
+                        <li>JavaScript: Template literals com ``</li>
+                        <li>Rust: Macro format!()</li>
+                        <li>Java: String.format() ou StringBuilder</li>
+                        <li>C++: std::format (C++20) ou stringstream</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-xl mb-8">
+            <div class="card-body">
+                <h2 id="exemplos" class="card-title mb-4 text-white">Exemplos em Diferentes Linguagens</h2>
+                <p class="mb-4">Vamos ver exemplos de interpolação de strings em várias linguagens de programação:</p>
+                
+                <div class="tabs-container mb-4">
+                    <div class="tabs">
+                        <a class="tab tab-lifted tab-active" data-lang="python">Python</a>
+                        <a class="tab tab-lifted" data-lang="ruby">Ruby</a>
+                        <a class="tab tab-lifted" data-lang="javascript">JavaScript</a>
+                        <a class="tab tab-lifted" data-lang="rust">Rust</a>
+                        <a class="tab tab-lifted" data-lang="java">Java</a>
+                        <a class="tab tab-lifted" data-lang="cpp">C++</a>
+                    </div>
+                </div>
+
+                <div id="language-market-info" class="bg-gray-800 text-white p-4 rounded-lg mb-4">
+                    Python é amplamente utilizado em ciência de dados, inteligência artificial, desenvolvimento web e automação. É popular em startups e grandes empresas de tecnologia.
+                </div>
+
+                <div class="mockup-code bg-gray-900 text-gray-100">
+                    <pre><code class="language-python">
+# Exemplos de F-strings em Python
+
+nome = "Alice"
+idade = 30
+
+# Exemplo básico
+print(f"Olá, meu nome é {nome} e eu tenho {idade} anos.")
+
+# Formatação de números
+pi = 3.14159
+print(f"O valor de pi é aproximadamente {pi:.2f}")
+
+# Expressões dentro de F-strings
+print(f"Daqui a 5 anos, {nome} terá {idade + 5} anos.")
+
+# Chamada de métodos
+print(f"O nome em maiúsculas é {nome.upper()}")
+
+# Expressões condicionais
+x = 10
+print(f"x é {'par' if x % 2 == 0 else 'ímpar'}")
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-ruby">
+# Exemplos de interpolação de strings em Ruby
+
+nome = "Alice"
+idade = 30
+
+# Exemplo básico
+puts "Olá, meu nome é #{nome} e eu tenho #{idade} anos."
+
+# Formatação de números
+pi = 3.14159
+puts "O valor de pi é aproximadamente #{'%.2f' % pi}"
+
+# Expressões dentro de strings
+puts "Daqui a 5 anos, #{nome} terá #{idade + 5} anos."
+
+# Chamada de métodos
+puts "O nome em maiúsculas é #{nome.upcase}"
+
+# Expressões condicionais
+x = 10
+puts "x é #{x % 2 == 0 ? 'par' : 'ímpar'}"
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-javascript">
+// Exemplos de template literals em JavaScript
+
+const nome = "Alice";
+const idade = 30;
+
+// Exemplo básico
+console.log(`Olá, meu nome é ${nome} e eu tenho ${idade} anos.`);
+
+// Formatação de números
+const pi = 3.14159;
+console.log(`O valor de pi é aproximadamente ${pi.toFixed(2)}`);
+
+// Expressões dentro de strings
+console.log(`Daqui a 5 anos, ${nome} terá ${idade + 5} anos.`);
+
+// Chamada de métodos
+console.log(`O nome em maiúsculas é ${nome.toUpperCase()}`);
+
+// Expressões condicionais
+const x = 10;
+console.log(`x é ${x % 2 === 0 ? 'par' : 'ímpar'}`);
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-rust">
+fn main() {
+    let nome = "Alice";
+    let idade = 30;
+
+    // Exemplo básico
+    println!("Olá, meu nome é {} e eu tenho {} anos.", nome, idade);
+
+    // Formatação de números
+    let pi = 3.14159;
+    println!("O valor de pi é aproximadamente {:.2}", pi);
+
+    // Expressões dentro de strings
+    println!("Daqui a 5 anos, {} terá {} anos.", nome, idade + 5);
+
+    // Chamada de métodos
+    println!("O nome em maiúsculas é {}", nome.to_uppercase());
+
+    // Expressões condicionais
+    let x = 10;
+    println!("x é {}", if x % 2 == 0 { "par" } else { "ímpar" });
+}
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-java">
+public class StringInterpolation {
+    public static void main(String[] args) {
+        String nome = "Alice";
+        int idade = 30;
+
+        // Exemplo básico
+        System.out.printf("Olá, meu nome é %s e eu tenho %d anos.%n", nome, idade);
+
+        // Formatação de números
+        double pi = 3.14159;
+        System.out.printf("O valor de pi é aproximadamente %.2f%n", pi);
+
+        // Expressões dentro de strings
+        System.out.printf("Daqui a 5 anos, %s terá %d anos.%n", nome, idade + 5);
+
+        // Chamada de métodos
+        System.out.printf("O nome em maiúsculas é %s%n", nome.toUpperCase());
+
+        // Expressões condicionais
+        int x = 10;
+        System.out.printf("x é %s%n", x % 2 == 0 ? "par" : "ímpar");
+    }
+}
+                    </code></pre>
+
+                    <pre class="hidden"><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;format&gt; // C++20
+
+int main() {
+    std::string nome = "Alice";
+    int idade = 30;
+
+    // Exemplo básico (C++20)
+    std::cout << std::format("Olá, meu nome é {} e eu tenho {} anos.\n", nome, idade);
+
+    // Formatação de números
+    double pi = 3.14159;
+    std::cout << std::format("O valor de pi é aproximadamente {:.2f}\n", pi);
+
+    // Expressões dentro de strings
+    std::cout << std::format("Daqui a 5 anos, {} terá {} anos.\n", nome, idade + 5);
+
+    // Chamada de métodos (usando transformação manual)
+    std::string nome_maiusculo = nome;
+    std::transform(nome_maiusculo.begin(), nome_maiusculo.end(), nome_maiusculo.begin(), ::toupper);
+    std::cout << std::format("O nome em maiúsculas é {}\n", nome_maiusculo);
+
+    // Expressões condicionais
+    int x = 10;
+    std::cout << std::format("x é {}\n", x % 2 == 0 ? "par" : "ímpar");
+
+    return 0;
+}
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        const marketInfo = {
+            python: "Python é amplamente utilizado em ciência de dados, inteligência artificial, desenvolvimento web e automação. É popular em startups e grandes empresas de tecnologia.",
+            ruby: "Ruby é frequentemente usado para desenvolvimento web, especialmente com o framework Ruby on Rails. É popular em startups e empresas que valorizam produtividade e legibilidade de código.",
+            javascript: "JavaScript é a linguagem principal para desenvolvimento web front-end, mas também é usada no back-end (Node.js). É essencial para empresas de tecnologia web e aplicativos móveis híbridos.",
+            rust: "Rust é usado principalmente em sistemas de baixo nível, desenvolvimento de sistemas operacionais, navegadores web e em aplicações que requerem alta performance e segurança.",
+            java: "Java é amplamente utilizado em desenvolvimento de aplicativos empresariais, sistemas Android, e em grandes sistemas distribuídos. É popular em grandes corporações e no setor financeiro.",
+            cpp: "C++ é usado em sistemas de baixo nível, desenvolvimento de jogos, sistemas embarcados e aplicações que requerem alto desempenho, como em finanças e engenharia."
+        };
+
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const lang = tab.getAttribute('data-lang');
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('tab-active'));
+                tab.classList.add('tab-active');
+                document.querySelectorAll('.mockup-code pre').forEach(pre => pre.classList.add('hidden'));
+                document.querySelector(`.mockup-code pre code.language-${lang}`).parentNode.classList.remove('hidden');
+                document.getElementById('language-market-info').textContent = marketInfo[lang];
+            });
+        });
+
+        // Funcionalidade de pesquisa
+        const searchModal = document.getElementById('search_modal');
+        const searchInput = document.getElementById('search_input');
+        const searchResults = document.getElementById('search_results');
+
+        // Dados de pesquisa
+        const searchData = [
+            { title: "Página Inicial", url: "index.html" },
+            { title: "Algoritmo", url: "algoritmo.html" },
+            { title: "Variáveis", url: "variaveis.html" },
+            { title: "Funções Internas", url: "funcoes-internas.html" },
+            { title: "F-strings e Interpolação", url: "f-strings.html" },
+            { title: "Operadores Aritméticos", url: "operadores-aritmeticos.html" }
+        ];
+
+        function openSearchModal() {
+            searchModal.showModal();
+            searchInput.focus();
+        }
+
+        function closeSearchModal() {
+            searchModal.close();
+            searchInput.value = '';
+            searchResults.innerHTML = '';
+        }
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const filteredResults = searchData.filter(item => 
+                item.title.toLowerCase().includes(query)
+            );
+
+            searchResults.innerHTML = filteredResults.map(item => 
+                `<a href="${item.url}" class="block p-2 hover:bg-base-200">${item.title}</a>`
+            ).join('');
+        });
+    </script>
+</body>
+</html>
